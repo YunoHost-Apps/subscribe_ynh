@@ -1,0 +1,34 @@
+{
+    "name": "subscribe",
+    "id": "subscribe",
+    "description": {
+        "en": "Web page to allow a person to ask an account on the Yunohost instance"
+    },
+    "developer": {
+        "name": "zamentur",
+        "email": "valentin@grimaud.me",
+        "url": "https://grimaud.me/"
+    },
+    "multi_instance": "true",
+    "arguments": {
+        "install" : [
+            {
+                "name": "domain",
+                "ask": {
+                    "en": "Choose a domain for the subscribe page"
+                },
+                "example": "domain.org"
+            },
+            {
+                "name": "path",
+                "ask": {
+                    "en": "Choose a path for the subscribe page"
+                },
+                "example": "/sub",
+                "default": "/sub"
+            }
+        ]
+    }
+}
+
+

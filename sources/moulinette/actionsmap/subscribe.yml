@@ -1,0 +1,153 @@
+#############################
+#     Global parameters     #
+#############################
+_global:
+    configuration:
+        authenticate:
+            - api
+        authenticator:
+            default:
+                vendor: ldap
+                help: admin_password
+                parameters:
+                    uri: ldap://localhost:389
+                    base_dn: dc=yunohost,dc=org
+                    user_rdn: cn=admin
+            ldap-anonymous:
+                vendor: ldap
+                parameters:
+                    uri: ldap://localhost:389
+                    base_dn: dc=yunohost,dc=org
+        argument_auth: true
+        lock: true
+    arguments:
+        -v:
+            full: --version
+            help: Display subscription version
+            action: version
+            version: subscription %version%
+
+#############################
+#       Subscription        #
+#############################
+subscription:
+    category_help: Manage subscriptions
+    actions:
+
+        ### subscription_test()
+        test:
+            action_help: List subscriptions
+            api: GET /test
+            configuration:
+                authenticate: false
+                
+        ### subscription_list()
+        list:
+            action_help: List subscriptions
+            api: GET /subscriptions
+            configuration:
+                authenticate: all
+                authenticator: ldap-anonymous
+            arguments:
+               --fields:
+                    help: fields to fetch
+                    nargs: "+"
+               -l:
+                    full: --limit
+                    help: Maximum number of user fetched
+                    type: int
+               -o:
+                    full: --offset
+                    help: Starting number for user fetching
+                    type: int
+
+        ### subscription_create()
+        create:
+            action_help: Create subscription
+            api: POST /subscriptions
+            configuration:
+                authenticate: false
+                authenticator: ldap-anonymous
+            arguments:
+                username:
+                    help: The unique username to create
+                    extra:
+                        pattern:
+                            - '^[a-z0-9_]+$'
+                            - pattern_username
+                -f:
+                    full: --firstname
+                    extra:
+                        ask: ask_firstname
+                        required: True
+                        pattern:
+                            - "^([^\\W\\d_]{2,30}[ ,.'-]{0,3})+$"
+                            - pattern_firstname
+                -l:
+                    full: --lastname
+                    extra:
+                        ask: ask_lastname
+                        required: True
+                        pattern:
+                            - "^([^\\W\\d_]{2,30}[ ,.']{0,3})+$"
+                            - pattern_lastname
+                -m:
+                    full: --mail
+                    help: Main unique email address
+                    extra:
+                        ask: ask_email
+                        required: True
+                        pattern:
+                            - '^[\w.-]+@[\w.-]+\.[a-zA-Z]{2,6}$'
+                            - pattern_email
+                -p:
+                    full: --password
+                    help: User password
+                    extra:
+                        password: ask_password
+                        required: True
+                        pattern:
+                            - '^.{3,}$'
+                            - pattern_password
+
+        ### subscription_valid()
+        valid:
+            action_help: Valid subscription
+            api: PUT /subscriptions/<username>
+            configuration:
+                authenticate: all
+            arguments:
+                username:
+                    help: Username to valid
+                    extra:
+                        pattern:
+                            - '^[a-z0-9_]+$'
+                            - pattern_username
+                    
+        ### subscription_delete()
+        delete:
+            action_help: Delete subscription
+            api: DELETE /subscriptions/<username>
+            configuration:
+                authenticate: all
+            arguments:
+                username:
+                    help: Username to delete
+                    extra:
+                        pattern:
+                            - '^[a-z0-9_]+$'
+                            - pattern_username
+                
+
+
+        ### subscription_info()
+        info:
+            action_help: Get subscription information
+            api: GET /subscriptions/<username>
+            configuration:
+                authenticate: all
+                authenticator: ldap-anonymous
+            arguments:
+                username:
+                    help: Username or email to get information
+

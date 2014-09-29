@@ -1,0 +1,22 @@
+#!/bin/bash
+
+app="subscribe"
+db_user=$app
+db_name=$app
+root_pwd=$(sudo cat /etc/yunohost/mysql)
+domain=$(sudo yunohost app setting $app domain)
+
+mysql -u root -p$root_pwd -e "DROP DATABASE $db_name ; DROP USER $db_user@localhost ;"
+
+sudo rm -f /etc/nginx/conf.d/$domain.d/$app.conf
+sudo rm -Rf /var/log/$app/
+sudo rm -rf /var/www/$app
+
+sudo rm -Rf /usr/share/yunohost/admin/modules/user_subscribe
+#TODO: retirer le module dans modules.json
+
+sudo rm -f /usr/share/moulinette/actionsmap/subscribe.yml
+sudo rm -Rf /usr/lib/moulinette/subscribe
+#TODO: ajouter le modules dans /etc/yunohost/modules.json
+
+
