@@ -1,11 +1,52 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="robots" content="noindex, nofollow">
+    <meta charset="utf-8">
+    <link rel="shortcut icon" href="icons/favicon.ico">
+    <link href="css/artichaut.css" rel="stylesheet">
+    <link href="css/artichaut-col.css" rel="stylesheet">
+    <link href="css/artichaut-messages.css" rel="stylesheet">
+    <link href="css/artichaut-buttons.css" rel="stylesheet">
+    <link href="css/fonts.css" rel="stylesheet">
+    <link href="css/ynh-style.css" rel="stylesheet">
+    <style>
+        #mail{
+            width:50%;
+        }
+    </style>
+</head>
 <body>
-    <form action="/yunohost/api/subscriptions" method="POST">
-    <input name="username" type="text" value="" /><br />
-    <input name="firstname" type="text" value="" /><br />
-    <input name="lastname" type="text" value="" /><br />
-    <input name="mail" type="text" value="" /><br />
-    <input name="password" type="password" value="" /><br />
-    <input name="submit" type="submit" value="Envoyer" />
-    </form>
-</body></html>
+
+    <header id="masthead" class="page-header">
+        <h1 id="logo" class="logo">
+            <img src="img/logo-ynh-white.svg"/><span class="element-invisible">Yunohost</span>
+        </h1>
+    </header>
+
+
+    <div class="overlay">
+        <div class="wrapper login">
+            <div id="content">
+                
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript" src="js/vendor/jquery-1.10.1.min.js"></script>
+    <script type="text/javascript" src="js/vendor/handlebars-v1.3.0.js"></script>
+    <script type="text/javascript" src="js/vendor/sammy.js"></script>
+    <script type="text/javascript" src="js/vendor/sammy.handlebars.js"></script>
+    <script type="text/javascript" src="js/vendor/sammy.json.js"></script>
+    <script type="text/javascript" src="js/vendor/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/y18n.js"></script>
+    <script type="text/javascript" src="js/app.js"></script>
+    <script type="text/javascript" src="js/global.js"></script>
+    <script type="text/javascript">
+        //<![CDATA[
+        app.initialize = app.initialize || function(){}
+        app.initialize();
+        //]]>
+    </script>
+</body>
+</html>

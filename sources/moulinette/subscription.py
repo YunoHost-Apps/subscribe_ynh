@@ -39,7 +39,7 @@ def subscription_test():
 	return { 'subscriptions' : 'ok' }
 	
 	
-def subscription_list(auth, fields=None, limit=None, offset=None):
+def subscription_list(auth,fields=None, limit=None, offset=None):
     """
     List subscriptions
 
@@ -66,11 +66,9 @@ def subscription_list(auth, fields=None, limit=None, offset=None):
     else:
         attrs = "username, firstname, lastname, mail"
             
-         
+
     cur = _get_db() 
-    
-    cur.execute("SELECT "+attrs+" FROM prefix_subscriptions LIMIT %d,%d",
-        [offset,limit])
+    cur.execute("SELECT "+attrs+" FROM prefix_subscriptions")
 
     for row in cur.fetchall() :
         result_list.append({
@@ -123,9 +121,9 @@ def subscription_create(username, firstname, lastname, mail, password):
     try:
         cur.execute("INSERT INTO prefix_subscriptions VALUES (%s,%s,%s,%s,%s)",
             [username,firstname,lastname,mail,pwd])
-    
-
-    if True: 
+    except:        
+        raise MoulinetteError(169, m18n.n('subscription_creation_failed'))
+    else:
         msignals.display(m18n.n('subscription_created'), 'success')
         hook_callback('post_subscription_create', [username, mail, password, firstname, lastname])
         return { 'firstname' : firstname,
@@ -133,7 +131,6 @@ def subscription_create(username, firstname, lastname, mail, password):
                 'username' : username, 
                 'mail' : mail }
 
-    raise MoulinetteError(169, m18n.n('subscription_creation_failed'))
     
     
 def subscription_valid(auth, username):

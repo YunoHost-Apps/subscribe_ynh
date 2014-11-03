@@ -20,12 +20,12 @@ _global:
                     base_dn: dc=yunohost,dc=org
         argument_auth: true
         lock: true
-    arguments:
-        -v:
-            full: --version
-            help: Display subscription version
-            action: version
-            version: subscription %version%
+    #~ arguments:
+        #~ -v:
+            #~ full: --version
+            #~ help: Display subscription version
+            #~ action: version
+            #~ version: subscription %version%
 
 #############################
 #       Subscription        #

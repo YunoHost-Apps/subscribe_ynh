@@ -1,0 +1,9 @@
+{
+    "username" : "Nom d'utilisateur",
+    "firstname" : "Prénom",
+    "lastname" : "Nom",
+    "mail" : "Mail",
+    "password" : "Mot de passe",
+    "passwordagain" : "Confirmation du mot de passe",
+    "subscribe" : "S'inscrire"
+}

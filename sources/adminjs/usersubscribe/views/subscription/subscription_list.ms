@@ -14,9 +14,17 @@
 <div class="list-group">
 {{#subscriptions}}
     <span class="list-group-item slide clearfix">
-        <span class="pull-right fa-chevron-right"></span>
+        <span class="pull-right">
+            <a href="#/subscriptions/valid/{{username}}" class="btn btn-success slide">
+                <span class="fa-check"></span> Valider
+            </a>
+            <a href="#/subscriptions/remove/{{username}}" class="btn btn-danger slide">
+                <span class="fa-trash-o"></span> Supprimer
+            </a>
+        </span>
         <h2 class="list-group-item-heading">{{username}} <small>{{fullname}}</small></h2>
         <p class="list-group-item-text">{{mail}}</p>
+        
     </span>
 {{/subscriptions}}
 
