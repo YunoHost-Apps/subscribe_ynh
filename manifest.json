@@ -1,19 +1,32 @@
 {
     "name": "subscribe",
     "id": "subscribe",
+    "packaging_format": 1,
+    "version": "1~ynh1",
     "description": {
         "en": "Web page to allow a person to ask an account on the Yunohost instance"
     },
-    "developer": {
-        "name": "zamentur",
-        "email": "valentin@grimaud.me",
-        "url": "https://grimaud.me/"
+    "license": "AGPL-3.0",
+    "maintainer": {
+        "name": "ljf",
+        "email": "ljf+menu_ynh@reflexlibre.net",
+        "url": "https://reflexlibre.net"
     },
-    "multi_instance": "true",
+    "url": "https://github.com/YunoHost-Apps/subscribe_ynh",
+    "requirements": {
+        "yunohost": ">= 2.7.2"
+    },
+    "multi_instance": true,
+    "services": [
+        "nginx",
+        "php5-fpm",
+        "mysql"
+    ],
     "arguments": {
         "install" : [
             {
                 "name": "domain",
+                "type": "domain",
                 "ask": {
                     "en": "Choose a domain for the subscribe page"
                 },
@@ -21,6 +34,7 @@
             },
             {
                 "name": "path",
+                "type": "path",
                 "ask": {
                     "en": "Choose a path for the subscribe page"
                 },
